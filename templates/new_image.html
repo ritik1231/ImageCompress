@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recolored Image</title>
+    <link href="{% static 'new_image.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h2>Recolored Image</h2>
+        <div class="images">
+            <div class="image-container">
+                <h3>Original Image</h3>
+                <p>Number of Colors: {{ original_colors }}</p>
+                <img id="original-image" src="data:image/png;base64,{{ original_image }}" alt="Original Image">
+            </div>
+            <div class="image-container">
+                <h3>Recolored Image</h3>
+                <p>Number of Colors: {{ num_colors }}</p>
+                <img id="output_image" src="data:image/png;base64,{{ output_image }}" alt="Recolored Image">
+            </div>
+        </div>
+        <button id="download-button">Download Recolored Image</button>
+        <form action='{% url "home"%}' method="get">
+            <button type="submit">Upload Another Image</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('download-button').onclick = function () {
+            const a = document.createElement('a');
+            a.href = 'data:image/png;base64,{{ image }}';
+            a.download = 'recolored_image.png';
+            a.click();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link href="{% static 'home.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <h2>Ever Wondered How Many Colors Are in an Image?</h2>
+    <p>Here, you can not only discover the number of colors in an image but also reduce them. Upload your image now and witness the transformation!</p>
+        <h2>Upload an Image</h2>
+        <form id="image-form" method="post" action="compress" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <label for="num-colors">Number of Colors:</label>
+            <input type="number" id="num-colors" name="num-colors" min="1" max="256" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
